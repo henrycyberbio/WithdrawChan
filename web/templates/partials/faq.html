@@ -1,0 +1,127 @@
+{% set messages = load_data(path="data/messages.json") %}{#
+  The FAQ is rich bilingual prose (lists, a table, formulas, links), so both languages
+  are written here as static HTML instead of plain-text i18n keys. Each block carries
+  `data-lang`; app.ts only toggles `hidden`, so no copy is injected with innerHTML.
+  English ships visible as the no-JavaScript fallback. Formulas are native MathML:
+  no script, no web font.
+#}<section class="faq" aria-labelledby="faq-title"><h2 id="faq-title" data-i18n="faqTitle">{{ messages.en.faqTitle }}</h2>
+<details class="faq-item"><summary><span class="faq-question"><span data-lang="en" lang="en">What is WithdrawChan?</span><span data-lang="zh" lang="zh-CN" hidden>WithdrawChan 是什么？</span></span><span class="chevron" aria-hidden="true">+</span></summary><div class="faq-answer">
+<div data-lang="en" lang="en">
+<p>WithdrawChan is a general-purpose withdrawal amount recommendation tool for privacy protocols. Simply enter how much you currently need, and it will recommend a withdrawal amount, calculated locally in your browser.</p>
+<p>As for the name~ <em>Chan</em> plays on both the Japanese affectionate suffix 「ちゃん」 and the romanization of the Chinese character 「禅」 (Zen): on one side, a futuristic withdrawal-chan; on the other, a quiet, understated withdrawal Zen.</p>
+</div>
+<div data-lang="zh" lang="zh-CN" hidden>
+<p>WithdrawChan 是面向隐私协议的通用提领金额推荐工具，用户仅需输入当前所需金额，就能在浏览器本地获得提领金额建议。</p>
+<p>关于名字~ Chan 同时借用了日语昵称后缀「ちゃん」和汉语「禅」的拼音：一边是未来感的“提现酱”，一边是安静克制的“提现禅”。</p>
+</div>
+</div></details>
+<details class="faq-item"><summary><span class="faq-question"><span data-lang="en" lang="en">Why do I need WithdrawChan if I'm already using a privacy protocol?</span><span data-lang="zh" lang="zh-CN" hidden>已经使用了隐私协议，为什么还需要 WithdrawChan？</span></span><span class="chevron" aria-hidden="true">+</span></summary><div class="faq-answer">
+<div data-lang="en" lang="en">
+<p>Even when a protocol conceals the direct link between deposit and withdrawal addresses, publicly available information, such as transaction amounts, can still provide clues. For example, depositing 100.123 USD worth of stablecoins and later withdrawing exactly 100.123 USD worth may allow an observer to link the two transactions. Transaction timing and address usage can provide additional clues, too.</p>
+<p>WithdrawChan approaches this problem through withdrawal amounts, helping users develop better withdrawal habits and reduce the risk of revealing unnecessary clues through their choice of amount. You don't need to understand complex privacy metrics or compare different withdrawal strategies yourself.</p>
+</div>
+<div data-lang="zh" lang="zh-CN" hidden>
+<p>即使协议隐藏了存入地址与提现地址的直接对应关系，金额等公开信息仍可能成为线索。例如，存入 100.123 美元稳定币后又提现 100.123 美元稳定币，可能让观察者把两笔交易联系起来。当然，交易时间和地址使用方式也可能提供额外线索。</p>
+<p>WithdrawChan 从提领金额入手，帮助用户改善提领习惯，减少因金额选择而暴露不必要线索的风险。它不要求用户理解复杂的隐私指标，也不需要用户自行比较不同的提领策略。</p>
+</div>
+</div></details>
+<details class="faq-item"><summary><span class="faq-question"><span data-lang="en" lang="en">How does WithdrawChan work?</span><span data-lang="zh" lang="zh-CN" hidden>WithdrawChan 如何工作？</span></span><span class="chevron" aria-hidden="true">+</span></summary><div class="faq-answer">
+<div data-lang="en" lang="en">
+<blockquote><p>You tell WithdrawChan how much you need. It suggests how much to withdraw.</p></blockquote>
+<p>According to <a href="https://ethprivacy.tools/how-private-is-privacy-pools/" target="_blank" rel="noopener noreferrer">Ben's research</a>, distinctive withdrawal amounts, withdrawing hastily after a deposit is approved, and large withdrawals can all compromise privacy. WithdrawChan advocates a simple habit: <strong>withdraw according to what you actually need right now, rather than emptying your entire balance in one go.</strong></p>
+<p>Once you enter the amount you need, WithdrawChan first rounds it up, then "flips a coin" to decide whether to keep rounding up to larger, round-number amounts, subject to your maximum withdrawal limit.</p>
+<p>For example, suppose you need 43.21 USDT and are willing to withdraw up to 120 USDT. First, round 43.21 up to 44, then flip a coin:</p>
+<table class="faq-table"><thead><tr><th scope="col">Current amount</th><th scope="col">Tails</th><th scope="col">Heads</th></tr></thead><tbody><tr><th scope="row">44 USDT</th><td>Recommend 44 and stop</td><td>Move to 50 and flip again</td></tr><tr><th scope="row">50 USDT</th><td>Recommend 50 and stop</td><td>Move to 100 and stop</td></tr></tbody></table>
+<p>The process stops at 100 because rounding up any further would exceed your 120 USDT limit.</p>
+<p>Why design it this way?</p>
+<ul>
+<li><strong>Withdraw as needed:</strong> Your immediate needs provide an important source of entropy for privacy protocols. Keeping some funds in the pool can also reduce the chance of withdrawal amounts matching their original deposits.</li>
+<li><strong>Rounding:</strong> Reduces the identifying clues left by distinctive fractional amounts, helping prevent your withdrawal amount from becoming a numerical fingerprint.</li>
+<li><strong>Randomization:</strong> If a user enters their actual balance as the maximum amount, a deterministic rounding rule may allow an observer to infer that balance. Fair coin flips ensure that the recommendation is no longer entirely determined by the inputs, making such inference more difficult.</li>
+</ul>
+<p>One thing to remember: <strong>please don't keep rerolling until you get a number you like~</strong> Watch out, or the law of large numbers might catch you!</p>
+<p>WithdrawChan has completed simulation tests on the Ethereum USDT, USDC, and ETH pools of Privacy Pools v1.</p>
+<ul>
+<li>Algorithm details: WithdrawChan Algorithm Overview</li>
+<li>Simulation tests: WithdrawChan Lab README</li>
+</ul>
+</div>
+<div data-lang="zh" lang="zh-CN" hidden>
+<blockquote><p>You tell WithdrawChan how much you need. It suggests how much to withdraw.</p></blockquote>
+<p>根据 <a href="https://ethprivacy.tools/how-private-is-privacy-pools/" target="_blank" rel="noopener noreferrer">Ben 的研究</a>，独特的提领金额、存款获批准后匆忙提领，以及大额提领，都可能暴露隐私。WithdrawChan 倡导一种简单的习惯：<strong>根据当下的实际需要提领，而不是一次性提空余额。</strong></p>
+<p>收到所需金额后，WithdrawChan 首先将其向上取整，再通过「抛硬币」决定是否继续向更大的整数金额取整，直到达到你设置的金额上限。</p>
+<p>举个例子，假设你现在需要 43.21 USDT，最多愿意提 120 USDT。先把 43.21 向上取整到 44，再抛硬币：</p>
+<table class="faq-table"><thead><tr><th scope="col">当前金额</th><th scope="col">抛到反面</th><th scope="col">抛到正面</th></tr></thead><tbody><tr><th scope="row">44 USDT</th><td>推荐 44，停下</td><td>进到 50，再抛</td></tr><tr><th scope="row">50 USDT</th><td>推荐 50，停下</td><td>进到 100，停下</td></tr></tbody></table>
+<p>到了 100 就不再抛了，再往上会超过你设定的 120 USDT 上限。</p>
+<p>为什么这样设计？</p>
+<ul>
+<li>按需提领：用户的当期需求是隐私协议的重要熵源。保留部分余额，也能减少金额与原始存款直接对应的机会。</li>
+<li>金额取整：减少零头带来的关联线索，避免让提现金额成为你的数字指纹。</li>
+<li>随机化：如果用户将真实余额填入最大金额，确定性的取整规则可能让观察者反推这一余额。公平地抛硬币则使推荐结果不再完全由输入决定，增加反推的难度。</li>
+</ul>
+<p>值得注意的是，<strong>请不要为了你喜欢的数字反复抽样噢</strong>，小心被大数定律捕获！</p>
+<p>目前，WithdrawChan 已经完成在 Privacy Pools v1 的以太坊 USDT/USDC/ETH 三个池子内的模拟测试。</p>
+<ul>
+<li>算法细节：WithdrawChan 算法介绍</li>
+<li>模拟测试：WithdrawChan Lab README</li>
+</ul>
+</div>
+</div></details>
+<details class="faq-item"><summary><span class="faq-question"><span data-lang="en" lang="en">How does WithdrawChan measure privacy?</span><span data-lang="zh" lang="zh-CN" hidden>WithdrawChan 如何衡量隐私？</span></span><span class="chevron" aria-hidden="true">+</span></summary><div class="faq-answer">
+<div data-lang="en" lang="en">
+<p>Suppose someone observes one of your withdrawals and tries to determine which deposit it came from. Even if there are 100 possible deposits, that doesn't mean each is equally likely. An observer might assign a 50% probability to one deposit, leaving the remaining 99 to share the other 50%.</p>
+<p>Simply counting candidate deposits is therefore not enough. WithdrawChan uses <strong>min-entropy</strong> to measure how confident an observer can be in their single best guess:</p>
+<math display="block"><mi>H</mi><mo>=</mo><mo>−</mo><msub><mi>log</mi><mn>2</mn></msub><mo>&#x2061;</mo><mi>h</mi></math>
+<p>Here, <math><mi>H</mi></math> is measured in bits, and <math><mi>h</mi></math> represents the probability that the observer's best single guess correctly identifies the true source.</p>
+<p>For example:</p>
+<ul>
+<li>If the highest probability assigned to a deposit is 50%, the min-entropy is 1 bit.</li>
+<li>If the highest probability is 25%, the min-entropy is 2 bits.</li>
+<li>If all 100 deposits are equally likely, the min-entropy is approximately 6.64 bits.</li>
+</ul>
+<p>Under the same observer model, <strong>higher min-entropy means a lower maximum probability of correctly identifying the source in a single guess.</strong></p>
+<p>When studying source anonymity, WithdrawChan first defines the candidate sources and the observer model. For instance, source posterior min-entropy can be expressed as:</p>
+<math display="block"><msub><mi>H</mi><mi>min</mi></msub><mo>=</mo><mo>−</mo><msub><mi>log</mi><mn>2</mn></msub><mo>&#x2061;</mo><mrow><mo>(</mo><munder><mi>max</mi><mi>i</mi></munder><mo>&#x2061;</mo><msub><mi>p</mi><mi>i</mi></msub><mo>)</mo></mrow></math>
+<p>Here, <math><msub><mi>p</mi><mi>i</mi></msub></math> is the posterior probability that deposit <math><mi>i</mi></math> is the source of the funds. The result is measured in bits. Under the same model, a higher value indicates a lower probability of success for the observer's best single guess.</p>
+<p>The bar chart above the Q&amp;A shows simulation results at a 50% adoption rate, using the default maximum withdrawal amount. For details of the observer models, experimental design, and further results, see the WithdrawChan Lab README.</p>
+</div>
+<div data-lang="zh" lang="zh-CN" hidden>
+<p>假设有人观察到你的一笔提领交易，并试图推断它来自哪笔存款。即使有 100 笔可能的存款，也不代表每一笔都同样可疑：观察者可能认为其中一笔有 50% 的可能性，而其他 99 笔分享剩余的概率。因此，仅仅计算候选存款的数量是不够的。WithdrawChan 使用 <strong>最小熵（Min-entropy）</strong> 来衡量观察者最有把握的一次猜测：</p>
+<math display="block"><mi>H</mi><mo>=</mo><mo>−</mo><msub><mi>log</mi><mn>2</mn></msub><mo>&#x2061;</mo><mi>h</mi></math>
+<p><math><mi>H</mi></math> 的单位为 bit，<math><mi>h</mi></math> 是观察者一次猜测命中真实来源的比例。</p>
+<p>例如：</p>
+<ul>
+<li>如果某笔存款的最高概率是 50%，最小熵就是 1 bit。</li>
+<li>如果最高概率是 25%，最小熵就是 2 bits。</li>
+<li>如果 100 笔存款的概率完全相等，最小熵约为 6.64 bits。</li>
+</ul>
+<p>在相同观察者模型下，<strong>最小熵越高，观察者一次猜中资金来源的最大概率就越低。</strong></p>
+<p>WithdrawChan研究来源匿名性时，需要先明确候选来源与观察者模型。例如，来源后验最小熵可写为 <math><msub><mi>H</mi><mi>min</mi></msub><mo>=</mo><mo>−</mo><msub><mi>log</mi><mn>2</mn></msub><mo>&#x2061;</mo><mrow><mo>(</mo><msub><mi>max</mi><mi>i</mi></msub><mo>&#x2061;</mo><msub><mi>p</mi><mi>i</mi></msub><mo>)</mo></mrow></math>，单位为 bits。同一模型下，值越高，最佳单次猜测的成功概率越低。这里的 <math><msub><mi>p</mi><mi>i</mi></msub></math> 是资金来源概率。</p>
+<p>Q&amp;A 上方的柱状图展示了采用率为 50%、使用默认金额上限时的模拟结果。有关观察者模型、实验设计及更多结果，请参阅 WithdrawChan Lab README。</p>
+</div>
+</div></details>
+<details class="faq-item"><summary><span class="faq-question"><span data-lang="en" lang="en">Does WithdrawChan protect my privacy? Can I self-host it?</span><span data-lang="zh" lang="zh-CN" hidden>WithdrawChan 本身保护隐私吗？可以自行托管吗？</span></span><span class="chevron" aria-hidden="true">+</span></summary><div class="faq-answer">
+<div data-lang="en" lang="en">
+<p>WithdrawChan calculates withdrawal recommendations entirely within your browser. It does not actively upload or record the amounts you enter. The website is published as static files on IPFS and made accessible through third-party hosting providers and gateways.</p>
+<p>It is worth emphasizing that <strong>local computation does not mean anonymous website access.</strong> IPFS gateways and other network infrastructure may still have access to connection information, including your IP address. For users with greater privacy needs, we recommend using a VPN, Tor, or similar tools, while remaining mindful of what your Internet Service Provider (ISP) may be able to observe.</p>
+<p>If you still have concerns, we completely understand, and we respect your choice! WithdrawChan is open source, and the repository provides the code and instructions needed to build the static website. You are free to self-host it.</p>
+</div>
+<div data-lang="zh" lang="zh-CN" hidden>
+<p>WithdrawChan 的金额推荐完全在你的浏览器本地完成，不会主动上传或记录你输入的金额。网站以静态文件形式发布至 IPFS，并通过第三方托管服务和网关提供访问。</p>
+<p>值得一提的是，<strong>本地计算不意味着访问网站时完全匿名。</strong> IPFS 网关、其他网络基础设施仍可能接触你的 IP 地址等连接信息。我们建议有更高隐私需求的用户使用 VPN、Tor 等工具，并留意互联网服务提供商（ISP）可能观察到的网络活动。</p>
+<p>如果你对此仍有顾虑，我们完全理解，我们尊重你！WithdrawChan 是开源项目，仓库中提供构建静态网站所需的代码和说明，你可以自行托管。</p>
+</div>
+</div></details>
+<details class="faq-item"><summary><span class="faq-question"><span data-lang="en" lang="en">What inspired the UI design?</span><span data-lang="zh" lang="zh-CN" hidden>UI 设计的灵感来自哪里？</span></span><span class="chevron" aria-hidden="true">+</span></summary><div class="faq-answer">
+<div data-lang="en" lang="en">
+<p>The glass panels draw on the transparency, refraction, and depth of Liquid Glass. The etched pulse patterns take inspiration from radio signals emitted by the pulsar CP 1919, whose layered waveforms also appeared on the cover of Joy Division's <em>Unknown Pleasures</em>.</p>
+<p>The <strong>Chan theme</strong> draws on Hajime Sorayama's chrome-plated mechanical aesthetic, blending Japanese robotic girls, dark metallic finishes, manga, and retrofuturism. The mineral palette and sculptural quality of the bar chart take inspiration from Daniel Arsham's <em>Eroded Brillo Box</em>, part of his <em>Future Relic</em> body of work.</p>
+<p>The <strong>Zen theme</strong> adopts a predominantly black palette, incorporating Eastern negative space, pale ink washes, and auspicious cloud motifs. The phrase 「大隱隱於市」 — <em>True reclusion is found amid the crowds</em> — appears as a fading inscription in the style of Slender Gold calligraphy.</p>
+</div>
+<div data-lang="zh" lang="zh-CN" hidden>
+<p>玻璃面板取意于 Liquid Glass 的通透、折射与层次感；脉冲蚀刻则受到脉冲星 CP 1919 的射电信号图启发，这组层叠波形也曾出现在 Joy Division 的《Unknown Pleasures》专辑封面上。</p>
+<p>酱主题借鉴空山基（Hajime Sorayama）的镀铬机械美学，融合日系机械少女、银黑金属、漫画与复古未来主义。柱状图的矿物配色与雕塑质感，则受到 Daniel Arsham 的「未来遗迹」系列作品《Eroded Brillo Box》启发。</p>
+<p>禅主题以黑色为基调，融入东方留白、淡墨与祥云，并以瘦金体风格的「大隱隱於市」作为渐隐题字。</p>
+</div>
+</div></details>
+</section>

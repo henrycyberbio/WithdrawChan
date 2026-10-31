@@ -1,0 +1,17 @@
+[project]
+name = "withdrawchan"
+version = "1.0.0"
+description = "Withdrawal amount recommendation for privacy pools"
+license = "GPL-3.0-or-later"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8", "fire>=0.7"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

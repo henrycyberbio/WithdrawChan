@@ -1,0 +1,21 @@
+{
+  "name": "withdrawchan",
+  "version": "1.0.0",
+  "description": "Withdrawal amount recommendation for privacy pools",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/js/index.d.ts",
+      "default": "./dist/js/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

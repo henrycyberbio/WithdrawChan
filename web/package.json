@@ -1,0 +1,26 @@
+{
+  "name": "withdrawchan",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "WithdrawChan v43 — Zola + TypeScript frontend for the local withdrawal engine",
+  "engines": { "node": ">=22.18.0" },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "check": "tsc --noEmit",
+    "build": "npm run check && node scripts/build.mjs",
+    "dev": "npm run build && node scripts/serve.mjs",
+    "preview": "node scripts/serve.mjs",
+    "test:unit": "node --test tests/algorithm.test.ts tests/artifacts.test.mjs tests/i18n.test.mjs",
+    "test:e2e": "playwright test",
+    "test:tooling": "node --test scripts/tooling.test.mjs",
+    "test": "npm run test:tooling && npm run test:unit && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/node": "^22.0.0",
+    "@withdrawchan/engine": "file:../src/js",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  }
+}

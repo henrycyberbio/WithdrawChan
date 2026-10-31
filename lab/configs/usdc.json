@@ -1,0 +1,66 @@
+{
+  "manifest": "../manifests/ppv1-usdc-26078315.json",
+  "snapshot_sha256": "533ce4462a2950392bd8117cfa5a85d2f08a81068274c5c70ef7f5216667200e",
+  "split_block": 25603700,
+  "theta": {
+    "pi": "21/41",
+    "s": "1/15",
+    "w": "0",
+    "g": "hi",
+    "unit": "10000000",
+    "source": "P2 high-confidence anchor pairs, USDC, n = 41: full withdrawals 21/41 (Wilson 95% 0.3648-0.6575); tail share at unit 10 USDC 1/15 (Wilson 95% 0.0119-0.2982); w not constrained by the data (the P2 shape statistic estimates the proportional share, a different estimand from the uniform share; 95% set 3/10..1), point value 0 as an explicit modelling choice; demand version hi; theta sha256 4b612ee8dee9867185177f83f784618cf1226534b73c47f61637811f3792b022"
+  },
+  "replicates": 10,
+  "rhos": [
+    "0",
+    "1/100",
+    "1/40",
+    "1/10",
+    "1/4",
+    "1/2",
+    "3/4",
+    "1"
+  ],
+  "rules": [
+    "need",
+    "decstep",
+    "decsmooth",
+    "popstep",
+    "popsmooth"
+  ],
+  "m_models": [
+    "double",
+    "balance"
+  ],
+  "adopters": [
+    "keep",
+    "drain"
+  ],
+  "observers": [
+    "historical",
+    "trained-logit",
+    "combinatorial"
+  ],
+  "combinatorial_tolerance": "0",
+  "threshold": "10000000",
+  "quantum": "10000",
+  "step": "10000",
+  "historical": "grid",
+  "logit_units": [
+    "10000",
+    "1000000",
+    "10000000",
+    "100000000",
+    "1000000000"
+  ],
+  "logit_train": {
+    "paths": 60,
+    "l2": "0.001",
+    "pi_lo": "0.3648",
+    "pi_hi": "0.6575",
+    "s_hi": "0.2982",
+    "w_hi": "1",
+    "source": "Training ranges: Wilson 95% intervals at 4 decimals, of pi (21/41) and of s at tail unit 10 USDC (1/15); w over its full 95% set [0, 1]; 60 paths and l2 = 0.001 as in the previous chain run; ranges from the USDC theta (sha256 4b612ee8dee9867185177f83f784618cf1226534b73c47f61637811f3792b022)"
+  },
+  "seed_root": "withdrawchan-v1-usdc"
+}

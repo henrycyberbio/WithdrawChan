@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" fill="none"><defs><g id="cloud" stroke-linecap="round" stroke-linejoin="round">
+<path d="M18 70C2 63 8 43 28 47C24 24 49 15 65 30C66 7 98 7 109 28C126 16 147 25 147 42C167 31 187 41 189 57C209 48 231 58 221 74C211 90 182 81 157 80C125 78 103 92 76 82C54 77 29 86 18 70Z" fill="#446c6e" fill-opacity=".28" stroke="#b08766" stroke-width="1.8"/>
+<path d="M29 61C27 48 45 41 56 49C70 59 60 76 48 70C41 67 45 58 51 61 M74 43C70 29 90 21 101 32C112 44 101 59 90 53C84 49 88 40 95 44 M124 54C122 40 141 34 151 45C162 58 149 74 138 66C134 62 139 55 144 58 M173 63C174 51 192 50 198 59C205 70 194 78 186 73" stroke="#c49a76" stroke-width="1.6"/>
+<g stroke="#ad8b69" stroke-width=".9" opacity=".65"><path d="M21 74C49 89 63 74 81 80C110 97 131 78 159 83C188 91 210 80 232 77 M31 82C55 92 67 82 81 87C109 102 132 86 162 89C187 96 211 89 235 82 M56 91C90 105 120 100 150 95C181 91 201 103 228 91"/></g></g><linearGradient id="side" x1="0" y1="145" x2="0" y2="920" gradientUnits="userSpaceOnUse"><stop stop-color="#b3906c" stop-opacity="0"/><stop offset=".45" stop-color="#b3906c" stop-opacity=".2"/><stop offset="1" stop-color="#b3906c" stop-opacity="0"/></linearGradient></defs>
+<use href="#cloud" transform="translate(76 267) rotate(-8 120 50)" opacity=".36"/>
+<use href="#cloud" transform="translate(68 780) scale(1.25)" opacity=".28"/>
+<use href="#cloud" transform="translate(1245 880) scale(1.05) rotate(-10 120 50)" opacity=".28"/>
+<path d="M1438 145V920" stroke="url(#side)" stroke-width=".8"/>
+<g transform="translate(1296 792)" stroke="#ad795b" stroke-width="1.25" opacity=".46" stroke-linecap="round" stroke-linejoin="round"><rect width="34" height="34" rx="1"/><path d="M7 22C3 18 9 12 13 16C11 7 23 6 25 14C31 11 32 21 25 23H13 M13 17C13 12 20 11 21 16C23 22 15 23 16 19 M6 28H28"/></g>
+<g stroke="#587b7b" opacity=".14" stroke-width=".9"><path d="M84 242C124 229 142 245 173 238C201 231 223 241 248 233 M98 235C121 225 145 233 165 229 M113 896C161 879 185 899 220 889C250 879 279 898 325 884"/></g></svg>

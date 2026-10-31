@@ -1,0 +1,66 @@
+{
+  "manifest": "../manifests/ppv1-eth-26078315.json",
+  "snapshot_sha256": "5cbce58919f5efc139f8dfd0a9128d5e6176d9d5dcdb159d3a2e2d2e2e4a3598",
+  "split_block": 25603700,
+  "theta": {
+    "pi": "6055/10000",
+    "s": "3/263",
+    "w": "0",
+    "g": "hi",
+    "unit": "10000000000000000",
+    "source": "Sensitivity variant of the ETH production theta: only theta.pi changed from 422/740 to 6055/10000, the upper end of the Wilson 95% interval for the full-withdrawal share (equals logit_train.pi_hi). All other fields, including seed_root, are identical to eth.json, so adopter sampling stays paired with the baseline by replicate."
+  },
+  "replicates": 10,
+  "rhos": [
+    "0",
+    "1/100",
+    "1/40",
+    "1/10",
+    "1/4",
+    "1/2",
+    "3/4",
+    "1"
+  ],
+  "rules": [
+    "need",
+    "decstep",
+    "decsmooth",
+    "popstep",
+    "popsmooth"
+  ],
+  "m_models": [
+    "double",
+    "balance"
+  ],
+  "adopters": [
+    "keep",
+    "drain"
+  ],
+  "observers": [
+    "historical",
+    "trained-logit",
+    "combinatorial"
+  ],
+  "combinatorial_tolerance": "0",
+  "threshold": "10000000000000000",
+  "quantum": "10000000000000",
+  "step": "10000000000000",
+  "historical": "grid",
+  "logit_units": [
+    "10000000000000",
+    "1000000000000000",
+    "10000000000000000",
+    "100000000000000000",
+    "1000000000000000000"
+  ],
+  "logit_train": {
+    "paths": 60,
+    "l2": "0.001",
+    "pi_lo": "0.5343",
+    "pi_hi": "0.6055",
+    "s_hi": "0.0330",
+    "w_hi": "1",
+    "source": "Training ranges: Wilson 95% intervals at 4 decimals, of pi and of s at tail unit 10D = 0.01 ETH; w_hi over its full [0, 1] as a range assumption (not a measured Wilson set); 60 paths and l2 = 0.001 as in the stablecoin runs. Filled from the ETH theta once production-ready."
+  },
+  "seed_root": "withdrawchan-v1-eth"
+}

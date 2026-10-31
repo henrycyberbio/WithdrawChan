@@ -1,0 +1,66 @@
+name: Local engine and website checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Install uv
+        run: pip install uv
+      - name: Test the recommendation engine
+        working-directory: src/python
+        run: |
+          uv sync
+          uv run python -m pytest -q
+      - name: Test the lab experiments
+        working-directory: lab
+        run: |
+          uv sync
+          uv run python -m pytest -q
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            src/js/package-lock.json
+            web/package-lock.json
+      - name: Install engine, website and checksum-verified Zola
+        run: npm run setup
+      - name: Install Chromium and WebKit with system dependencies
+        run: npm exec --prefix web -- playwright install --with-deps chromium webkit
+      - name: Check website types against original engine
+        run: npm run check
+      - name: Build and run engine, tooling, unit and browser tests
+        run: npm test
+      - name: Save static website (no deployment)
+        uses: actions/upload-artifact@v4
+        with:
+          name: withdrawchan-public
+          path: web/public/
+          if-no-files-found: error
+      - name: Save browser reports and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: withdrawchan-browser-reports
+          path: |
+            web/playwright-report/
+            web/test-results/
+          if-no-files-found: warn

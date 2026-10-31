@@ -1,0 +1,17 @@
+{
+  "name": "withdrawchan-local-integration",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local orchestration for the original WithdrawChan engine and Zola website",
+  "engines": { "node": ">=22.18.0" },
+  "scripts": {
+    "setup": "npm ci --prefix src/js && npm ci --prefix web && npm run setup --prefix web",
+    "build": "npm run build --prefix src/js && npm run build --prefix web",
+    "check": "npm run build --prefix src/js && npm run check --prefix web",
+    "test": "npm run build && npm test --prefix src/js && npm test --prefix web",
+    "test:engine": "npm run build --prefix src/js && npm test --prefix src/js",
+    "test:web": "npm run build && npm test --prefix web",
+    "preview": "npm run preview --prefix web",
+    "dev": "npm run build && npm run preview"
+  }
+}

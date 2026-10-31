@@ -1,0 +1,10 @@
+node_modules/
+.tools/
+.generated/
+public/
+playwright-report/
+test-results/
+playwright/.cache/
+.DS_Store
+Thumbs.db
+*.log

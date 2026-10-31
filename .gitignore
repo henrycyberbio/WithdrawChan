@@ -1,0 +1,20 @@
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/
+node_modules/
+dist/
+.mypy_cache/
+
+# Local website tooling and generated output
+web/.tools/
+web/.generated/
+web/public/
+web/playwright-report/
+web/test-results/
+
+# Build-time generated i18n data for the Zola templates
+web/data/messages.json
+
+# IDE
+.vscode/

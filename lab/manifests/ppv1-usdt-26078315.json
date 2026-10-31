@@ -1,0 +1,12 @@
+{
+  "chain_id": 1,
+  "entrypoint": "0x6818809eefce719e480a7526d76bd3e561526b46",
+  "pool": "0xe859c0bd25f260baee534fb52e307d3b64d24572",
+  "asset": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+  "decimals": 6,
+  "d": "1000000",
+  "start_block": 22153713,
+  "end_block": 26078315,
+  "end_block_hash": "0xf42d8b190b38084a21157df98cbeba33df123813c8591c826edef6b708365c50",
+  "snapshot_sha256": "651b808f1994e7a0f3199e7420f1b25e97befb5c8d00a0c553d136e2ef7e0639"
+}

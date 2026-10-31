@@ -1,0 +1,50 @@
+/* Frontend overrides layered after the original stylesheet.
+   Hero typography, the withdrawal-hygiene hint and the gross/fee note live here so the
+   original layout rules, chart markup and image assets stay untouched. */
+body #input-title,
+body.zen #input-title {
+  font-size: 32px;
+}
+
+html[lang="zh-CN"] #input-title {
+  word-break: keep-all;
+}
+
+body .input-section > .eyebrow,
+body.zen .input-section > .eyebrow {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+body .hygiene-note,
+body.zen .hygiene-note {
+  margin: 14px 0 0;
+  max-width: 62ch;
+  font: 400 12px/1.75 var(--font-body);
+  color: var(--muted);
+}
+
+body .gross-note,
+body.zen .gross-note {
+  margin: 0 0 14px;
+  max-width: 60ch;
+  font: 400 12px/1.75 var(--font-body);
+  color: var(--muted);
+}
+
+@media (max-width: 650px) {
+  body #input-title,
+  body.zen #input-title {
+    font-size: 24px;
+  }
+
+  body .input-section > .eyebrow,
+  body.zen .input-section > .eyebrow {
+    font-size: 12px;
+  }
+
+  body .hygiene-note,
+  body.zen .hygiene-note {
+    margin-top: 12px;
+  }
+}
