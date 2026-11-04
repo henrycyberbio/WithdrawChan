@@ -42,8 +42,8 @@
 <p>One thing to remember: <strong>please don't keep rerolling until you get a number you like~</strong> Watch out, or the law of large numbers might catch you!</p>
 <p>WithdrawChan has completed simulation tests on the Ethereum USDT, USDC, and ETH pools of Privacy Pools v1.</p>
 <ul>
-<li>Algorithm details: WithdrawChan Algorithm Overview</li>
-<li>Simulation tests: WithdrawChan Lab README</li>
+<li>Algorithm details: <a href="https://github.com/henrycyberbio/WithdrawChan/blob/master/src/README.md" target="_blank" rel="noopener noreferrer">WithdrawChan Algorithm Overview</a></li>
+<li>Simulation tests: <a href="https://github.com/henrycyberbio/WithdrawChan/blob/master/lab/README.md" target="_blank" rel="noopener noreferrer">WithdrawChan Lab README</a></li>
 </ul>
 </div>
 <div data-lang="zh" lang="zh-CN" hidden>
@@ -62,8 +62,8 @@
 <p>值得注意的是，<strong>请不要为了你喜欢的数字反复抽样噢</strong>，小心被大数定律捕获！</p>
 <p>目前，WithdrawChan 已经完成在 Privacy Pools v1 的以太坊 USDT/USDC/ETH 三个池子内的模拟测试。</p>
 <ul>
-<li>算法细节：WithdrawChan 算法介绍</li>
-<li>模拟测试：WithdrawChan Lab README</li>
+<li>算法细节：<a href="https://github.com/henrycyberbio/WithdrawChan/blob/master/doc/src.README.zh.md" target="_blank" rel="noopener noreferrer">WithdrawChan 算法介绍</a></li>
+<li>模拟测试：<a href="https://github.com/henrycyberbio/WithdrawChan/blob/master/doc/lab.README.zh.md" target="_blank" rel="noopener noreferrer">WithdrawChan Lab README</a></li>
 </ul>
 </div>
 </div></details>
@@ -83,7 +83,7 @@
 <p>When studying source anonymity, WithdrawChan first defines the candidate sources and the observer model. For instance, source posterior min-entropy can be expressed as:</p>
 <math display="block"><msub><mi>H</mi><mi>min</mi></msub><mo>=</mo><mo>−</mo><msub><mi>log</mi><mn>2</mn></msub><mo>&#x2061;</mo><mrow><mo>(</mo><munder><mi>max</mi><mi>i</mi></munder><mo>&#x2061;</mo><msub><mi>p</mi><mi>i</mi></msub><mo>)</mo></mrow></math>
 <p>Here, <math><msub><mi>p</mi><mi>i</mi></msub></math> is the posterior probability that deposit <math><mi>i</mi></math> is the source of the funds. The result is measured in bits. Under the same model, a higher value indicates a lower probability of success for the observer's best single guess.</p>
-<p>The bar chart above the Q&amp;A shows simulation results at a 50% adoption rate, using the default maximum withdrawal amount. For details of the observer models, experimental design, and further results, see the WithdrawChan Lab README.</p>
+<p>The bar chart above the Q&amp;A shows simulation results at a 50% adoption rate, using the default maximum withdrawal amount. For details of the observer models, experimental design, and further results, see the <a href="https://github.com/henrycyberbio/WithdrawChan/blob/master/lab/README.md" target="_blank" rel="noopener noreferrer">WithdrawChan Lab README</a>.</p>
 </div>
 <div data-lang="zh" lang="zh-CN" hidden>
 <p>假设有人观察到你的一笔提领交易，并试图推断它来自哪笔存款。即使有 100 笔可能的存款，也不代表每一笔都同样可疑：观察者可能认为其中一笔有 50% 的可能性，而其他 99 笔分享剩余的概率。因此，仅仅计算候选存款的数量是不够的。WithdrawChan 使用 <strong>最小熵（Min-entropy）</strong> 来衡量观察者最有把握的一次猜测：</p>
@@ -97,7 +97,7 @@
 </ul>
 <p>在相同观察者模型下，<strong>最小熵越高，观察者一次猜中资金来源的最大概率就越低。</strong></p>
 <p>WithdrawChan研究来源匿名性时，需要先明确候选来源与观察者模型。例如，来源后验最小熵可写为 <math><msub><mi>H</mi><mi>min</mi></msub><mo>=</mo><mo>−</mo><msub><mi>log</mi><mn>2</mn></msub><mo>&#x2061;</mo><mrow><mo>(</mo><msub><mi>max</mi><mi>i</mi></msub><mo>&#x2061;</mo><msub><mi>p</mi><mi>i</mi></msub><mo>)</mo></mrow></math>，单位为 bits。同一模型下，值越高，最佳单次猜测的成功概率越低。这里的 <math><msub><mi>p</mi><mi>i</mi></msub></math> 是资金来源概率。</p>
-<p>Q&amp;A 上方的柱状图展示了采用率为 50%、使用默认金额上限时的模拟结果。有关观察者模型、实验设计及更多结果，请参阅 WithdrawChan Lab README。</p>
+<p>Q&amp;A 上方的柱状图展示了采用率为 50%、使用默认金额上限时的模拟结果。有关观察者模型、实验设计及更多结果，请参阅 <a href="https://github.com/henrycyberbio/WithdrawChan/blob/master/doc/lab.README.zh.md" target="_blank" rel="noopener noreferrer">WithdrawChan Lab README</a>。</p>
 </div>
 </div></details>
 <details class="faq-item"><summary><span class="faq-question"><span data-lang="en" lang="en">Does WithdrawChan protect my privacy? Can I self-host it?</span><span data-lang="zh" lang="zh-CN" hidden>WithdrawChan 本身保护隐私吗？可以自行托管吗？</span></span><span class="chevron" aria-hidden="true">+</span></summary><div class="faq-answer">

@@ -158,7 +158,14 @@ test('the FAQ has no stray Markdown, LaTeX, private notes or unsafe links', () =
   assert.doesNotMatch(text, /\\[a-zA-Z]+/, 'no unrendered LaTeX commands');
   assert.doesNotMatch(text, /\*\*|\]\(/, 'no unrendered Markdown emphasis or links');
   assert.doesNotMatch(text, /\((?:H|h|p_i|i)\)/, 'no formula symbols left as plain parentheses');
-  assert.doesNotMatch(text, /chatgpt\.com|Projects\/WithdrawChan|\.md\b|obsidian/i, 'no chat sessions or vault paths');
+  // The FAQ links into the public repo, and those file names end in `.md`; scan the
+  // prose without those URLs, then prove each linked path really exists in this repo.
+  const repoLinks = [...text.matchAll(/https:\/\/github\.com\/henrycyberbio\/WithdrawChan\/blob\/master\/([\w./-]+)/g)];
+  const prose = text.replace(/https:\/\/github\.com\/henrycyberbio\/WithdrawChan\/blob\/master\/[\w./-]+/g, '');
+  assert.doesNotMatch(prose, /chatgpt\.com|Projects\/WithdrawChan|\.md\b|obsidian/i, 'no chat sessions or vault paths');
+  for (const [, file] of repoLinks) {
+    assert.ok(existsSync(path.join(root, '..', file)), `FAQ links to a repo path that does not exist: ${file}`);
+  }
   assert.doesNotMatch(text, /均抛硬币|Privacy Pool v1/, 'fixed typos stay fixed');
   for (const [anchor] of text.matchAll(/<a\b[^>]*>/g)) {
     assert.match(anchor, /href="https:\/\//, `${anchor} is an absolute https link`);
